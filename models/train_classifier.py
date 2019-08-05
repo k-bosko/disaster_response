@@ -1,4 +1,5 @@
 import sys
+import warnings
 import pickle
 import gzip
 import pandas as pd
@@ -21,6 +22,7 @@ from sklearn.metrics import classification_report
 from sklearn.ensemble import RandomForestClassifier
 
 
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def load_data(database_filepath):
     engine = create_engine(f'sqlite:///{database_filepath}')
