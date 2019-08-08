@@ -1,6 +1,6 @@
 # Disaster Response Project
 
-In this project I built a model for an API that classifies disaster messages. The dataset provided by [Figure Eight](https://www.figure-eight.com) contains real messages that were sent during disaster events. The task was to categorize the messages into 36 different categories in order to send them to an appropriate disaster relief agency.
+In this project I built a model for an API that classifies disaster messages. The datasets provided by [Figure Eight](https://www.figure-eight.com) contain real messages sent during disaster events and their respective categories. The task was to train the supervised ML classifier to automate categorization of the new messages so that different disaster relief agencies would receive only relevant ones.
 
 ## Requirements
 
@@ -33,10 +33,10 @@ Python 3.7.2
 ## Results
 
 **Step 1: ETL Pipeline**
-* Loaded the messages and categories datasets
+* Loaded the messages and categories datasets (`disaster_messages.csv`, `disaster_categories.csv`)
 * Merged the two datasets
 *	Cleaned the data 
-*	Saved it in a SQLite database
+*	Saved it in a SQLite database `DisasterResponse.db`
             
 **Step 2: ML Pipeline**
 * Loaded data from the SQLite database
@@ -44,10 +44,10 @@ Python 3.7.2
 *	Built a text processing and ML pipeline using NLTK and scikit-learn's Pipeline 
 *	Trained and tuned the model using GridSearchCV
 *	Evaluated results on the test set
-*	Exported the final model as a gzip pickle file
+*	Exported the final model as a gzip pickle file `model.p.gz`
             
 **Step 3: Python Scripts**
-* Converted the jupyter notebooks into python scripts
+* Converted the jupyter notebooks into python scripts `process_data.py` and `train_classifier.py`
 * Refactored the code to make it modular
             
 **Step 4: Flask App**
