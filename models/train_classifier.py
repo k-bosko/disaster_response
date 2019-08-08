@@ -49,13 +49,13 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
-     ''' Tokenizer for CountVectorizer() 
+    ''' Tokenizer for CountVectorizer() 
 
         Inputs: 
             text: message instance
         Output: 
             clean_tokens: list of lemmatized tokens based on words from the message
-    '''   
+    ''' 
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
