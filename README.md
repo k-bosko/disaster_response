@@ -32,13 +32,13 @@ Python 3.7.2
 
 ## Results
 
-- **Step 1: ETL Pipeline**
+**Step 1: ETL Pipeline**
 * Loaded the messages and categories datasets
 * Merged the two datasets
 *	Cleaned the data 
 *	Saved it in a SQLite database
             
-- **Step 2: ML Pipeline**
+**Step 2: ML Pipeline**
 * Loaded data from the SQLite database
 *	Split the dataset into training and test sets
 *	Built a text processing and ML pipeline using NLTK and scikit-learn's Pipeline 
@@ -46,11 +46,11 @@ Python 3.7.2
 *	Evaluated results on the test set
 *	Exported the final model as a gzip pickle file
             
-- **Step 3: Python Scripts**
+**Step 3: Python Scripts**
 * Converted the jupyter notebooks into python scripts
 * Refactored the code to make it modular
             
-- **Step 4: Flask App**
+**Step 4: Flask App**
 * Uploaded sql database file and pkl file with the final model to a Flask app template
 * Created data visualizations in the app using Plotly
             
