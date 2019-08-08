@@ -4,6 +4,14 @@ import numpy as np
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
+    ''' Loads data from the specified location
+
+    Inputs: 
+        messages_filepath: filepath to the csv file with messages
+        categories_filepath: filepath to the csv file with categories
+    Output:
+        df: dataframe of merged messages and categories 
+    '''
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
     df = messages.merge(categories, on='id')
@@ -11,6 +19,13 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    ''' Cleans data 
+
+    Inputs: 
+        df: merged dataframe as returned from load_data()
+    Output:
+        df: cleaned dataframe  
+    '''
     categories = df.categories.str.split(';', expand=True)
     row = categories.iloc[0]
     category_colnames = row.apply(lambda x: x.split('-')[0]) 
@@ -31,14 +46,27 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    ''' Saves data 
+
+    Inputs: 
+        df: cleaned dataframe as returned from clean_data()
+        database_filename: specify the filename of the database to be saved (including subfolders if necessary)
+                             e.g. data/DisasterResponse.db
+    Output: None
+    '''
     #specify database_filename e.g. data/DisasterResponse.db
     engine = create_engine(f'sqlite:///{database_filename}')
     sql = "DROP TABLE IF EXISTS DisasterResponse"
     engine.execute(sql)
-    return df.to_sql('DisasterResponse', engine, index=False)
+    df.to_sql('DisasterResponse', engine, index=False)
 
 
 def main():
+    ''' Executes the processing steps - loading, cleaning, saving
+
+    Inputs: None
+    Output: saved sql database 
+    '''
     if len(sys.argv) == 4:
 
         messages_filepath, categories_filepath, database_filepath = sys.argv[1:]
