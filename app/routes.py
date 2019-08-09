@@ -41,7 +41,7 @@ engine = create_engine('sqlite:///data/DisasterResponse.db')
 df = pd.read_sql_table('DisasterResponse', engine)
 df_nochildalone = df.drop(['child_alone'], axis=1)
 
-with gzip.open('../models/model.p.gz', 'rb') as f:
+with gzip.open('models/model.p.gz', 'rb') as f:
     # load model
     model = joblib.load(f)
 
