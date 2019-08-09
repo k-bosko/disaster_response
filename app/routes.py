@@ -17,24 +17,24 @@ from sqlalchemy import create_engine
 
 #app = Flask(__name__)
 
-def tokenize(text):     
-    ''' Tokenizer for CountVectorizer() 
+# def tokenize(text):     
+#     ''' Tokenizer for CountVectorizer() 
 
-        Inputs: 
-            text: message instance
-        Output: 
-            clean_tokens: list of lemmatized tokens based on words from the message
-    '''
+#         Inputs: 
+#             text: message instance
+#         Output: 
+#             clean_tokens: list of lemmatized tokens based on words from the message
+#     '''
 
-    tokens = word_tokenize(text)
-    lemmatizer = WordNetLemmatizer()
+#     tokens = word_tokenize(text)
+#     lemmatizer = WordNetLemmatizer()
 
-    clean_tokens = []
-    for tok in tokens:
-        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-        clean_tokens.append(clean_tok)
+#     clean_tokens = []
+#     for tok in tokens:
+#         clean_tok = lemmatizer.lemmatize(tok).lower().strip()
+#         clean_tokens.append(clean_tok)
 
-    return clean_tokens
+#     return clean_tokens
 
 # load data
 engine = create_engine('sqlite:///data/DisasterResponse.db')
