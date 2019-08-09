@@ -18,7 +18,7 @@ https://disaster-reponse-api.herokuapp.com
     - To run ML pipeline that trains classifier and saves it as gzip pickle object <br>
         `python models/train_classifier.py data/DisasterResponse.db models/model.p.gz`
 
-2. Run the following command in the app's directory to run the web app <br>
+2. Run the following command to start the server locally:<br>
     `localhost=1 python run.py`
 
 3. Go to http://0.0.0.0:3001/
