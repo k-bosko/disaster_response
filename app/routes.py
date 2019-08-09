@@ -33,9 +33,6 @@ def index():
     rowSums = df.iloc[:,4:].sum(axis=1)
     multiCategory_counts = rowSums.value_counts()
 
-    #genre_counts = df.groupby('genre').count()['message']
-    #genre_names = list(genre_counts.index)
-    
     # create visuals
     graphs = [
         {
