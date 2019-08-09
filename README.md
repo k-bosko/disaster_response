@@ -2,6 +2,10 @@
 
 In this project I built a model for an API that classifies disaster messages. The datasets provided by [Figure Eight](https://www.figure-eight.com) contain real messages sent during disaster events and their respective categories. The task was to train the supervised ML classifier to automate categorization of the new messages so that different disaster relief agencies would receive only relevant ones.
 
+## Deployment
+
+https://disaster-reponse-api.herokuapp.com
+
 ## Requirements
 
 ```$ pip install -r requirements.txt```
@@ -25,7 +29,7 @@ Python 3.7.2
         `python models/train_classifier.py data/DisasterResponse.db models/model.p.gz`
 
 2. Run the following command in the app's directory to run the web app <br>
-    `python run.py`
+    `localhost=1 python run.py`
 
 3. Go to http://0.0.0.0:3001/
 
