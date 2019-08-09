@@ -10,16 +10,6 @@ https://disaster-reponse-api.herokuapp.com
 
 ```$ pip install -r requirements.txt```
 
-Python 3.7.2
-* numpy==1.16.4
-* Flask==1.1.1
-* plotly==4.0.0
-* SQLAlchemy==1.3.5
-* pandas==0.25.0
-* nltk==3.4.4
-* scikit_learn==0.21.3
-
-
 ## Instructions:
 1. Run the following commands in the project's root directory to set up the database and model.
 
