@@ -1,11 +1,11 @@
 import gzip
 import json
 
+import joblib
 import pandas as pd
 import plotly
 from flask import jsonify, render_template, request
 from plotly.graph_objs import Bar
-from sklearn.externals import joblib
 from sqlalchemy import create_engine
 
 from app import app
