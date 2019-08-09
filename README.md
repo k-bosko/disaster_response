@@ -53,7 +53,14 @@ Python 3.7.2
 **Step 4: Flask App**
 * Uploaded sql database file and pkl file with the final model to a Flask app template
 * Created data visualizations in the app using Plotly
-            
+
+## Discussion
+Because messages are being categorized into 36 different categories and the dataset contains only 26216 messages, some categories have either very small number of positive instances or after splitting the data into train/test sets and then into cross-validation sets might end up having no positive instances at all! Even the original dataset has a category "child_alone" without a single message in it (which put constrains on using certain ML models like those relying on gradient descent). <br>
+As a result we have very high **class imbalances** in this project, which influence the classification results to a large degree. Thus, with no/little positive cases, the model predicts the '0' class most of the time and is correct, which leads to high accuracy scores, but doesn't help with identification of relevant messages in this category. The accuracy score becomes a bad evaluation metric in the highly imbalanced tasks, with f1_score being a more appropriate one. <br>
+There are several ways to handle imbalanced dataset with resampling being one of the most popular. In this case, we artificially increase the instances of the underrepresented class (e.g. SMOTE technique) or downsize the instances of the overrepresented class. Also some classifiers like RandomForestClassifier in scikit-learn have class_imbalance among parameters. (I tried tuning it, but got inferior results.) <br>
+Since it is a multilabel classification task (meaning we assign simulteniously several labels to a message which are not mutually exclusive), I am not sure if we need to artificially increase the prediction of certain labels. We risk having more false positives in this case, which means bad allocation of resources especially during disasters. For a disaster response project, I believe it is more important for the model to be able to discern relevant messages from irrelevant ones and perform some high-level categorization well (e.g. earthquake vs flood). <br>
+As such, the model trained in this project does just that. It has relatively high f1_score on 'relevant', 'aid_related', 'weather_related' categories (0.88, 0.72, 0.63 respectively for positive instances) and can discriminate between earthquake/flood/storm messages well (with f1_score scores being 0.82, 0.63, 0.66 respectively). It also identifies messages related to water, shelter, food, clothing relatively well (0.69, 0.63, 0.78, 0.48). 
+
 ## Acknowledgements
 
 This project is part of [Udacity Data Science Nanodegree Programm](https://www.udacity.com/course/data-scientist-nanodegree--nd025). 
