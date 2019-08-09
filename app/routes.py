@@ -37,7 +37,7 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///../data/DisasterResponse.db')
+engine = create_engine('sqlite:///data/DisasterResponse.db')
 df = pd.read_sql_table('DisasterResponse', engine)
 df_nochildalone = df.drop(['child_alone'], axis=1)
 
@@ -133,5 +133,5 @@ def go():
 #     app.run(host='0.0.0.0', port=3001, debug=True)
 
 
-if __name__ == '__main__':
-    main()
+#if __name__ == '__main__':
+    #main()
