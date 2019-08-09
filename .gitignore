@@ -1,1 +1,3 @@
 disaster_response.code-workspace
+disresp_venv
+*.pyc
