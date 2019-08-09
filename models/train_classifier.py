@@ -1,26 +1,19 @@
+import gzip
+import pickle
 import sys
 import warnings
-import pickle
-import gzip
-import pandas as pd
+
 import numpy as np
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.linear_model import SGDClassifier
+from sklearn.metrics import classification_report
+from sklearn.model_selection import train_test_split
+from sklearn.multioutput import MultiOutputClassifier
+from sklearn.pipeline import Pipeline
 from sqlalchemy import create_engine
 
-import nltk
-nltk.download(['punkt', 'wordnet'])
-
-from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer
-
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-
-from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline
-from sklearn.multioutput import MultiOutputClassifier
-from sklearn.metrics import classification_report
-from sklearn.linear_model import SGDClassifier
-
-
+from dependencies.tok import tokenize
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
@@ -46,25 +39,6 @@ def load_data(database_filepath):
     #category_names = df.columns[4:]
     category_names = df_nochildalone.columns[4:]
     return X, Y, category_names
-
-
-def tokenize(text):
-    ''' Tokenizer for CountVectorizer() 
-
-        Inputs: 
-            text: message instance
-        Output: 
-            clean_tokens: list of lemmatized tokens based on words from the message
-    ''' 
-    tokens = word_tokenize(text)
-    lemmatizer = WordNetLemmatizer()
-
-    clean_tokens = []
-    for tok in tokens:
-        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-        clean_tokens.append(clean_tok)
-
-    return clean_tokens
 
 
 def build_model():
