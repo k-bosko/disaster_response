@@ -1,40 +1,15 @@
-from app import app
-
-import json
-import plotly
-import pandas as pd
 import gzip
+import json
 
-from nltk.stem import WordNetLemmatizer
-from nltk.tokenize import word_tokenize
-
-from flask import Flask
-from flask import render_template, request, jsonify
+import pandas as pd
+import plotly
+from flask import jsonify, render_template, request
 from plotly.graph_objs import Bar
 from sklearn.externals import joblib
 from sqlalchemy import create_engine
 
-
-#app = Flask(__name__)
-
-# def tokenize(text):     
-#     ''' Tokenizer for CountVectorizer() 
-
-#         Inputs: 
-#             text: message instance
-#         Output: 
-#             clean_tokens: list of lemmatized tokens based on words from the message
-#     '''
-
-#     tokens = word_tokenize(text)
-#     lemmatizer = WordNetLemmatizer()
-
-#     clean_tokens = []
-#     for tok in tokens:
-#         clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-#         clean_tokens.append(clean_tok)
-
-#     return clean_tokens
+from app import app
+from dependencies.tok import tokenize
 
 # load data
 engine = create_engine('sqlite:///data/DisasterResponse.db')
@@ -127,11 +102,3 @@ def go():
         query=query,
         classification_result=classification_results
     )
-
-
-def main():
-    #app.run(host='0.0.0.0', port=3001, debug=True)
-    app.run(debug=True)
-
-if __name__ == '__main__':
-    main(tokenize())
