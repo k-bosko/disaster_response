@@ -3,6 +3,7 @@ import pickle
 import sys
 import warnings
 
+import nltk
 import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
@@ -16,6 +17,11 @@ from sqlalchemy import create_engine
 from dependencies.tok import tokenize
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
+
+nltk.download('stopwords', quiet=True, raise_on_error=True)
+stop_words = set(nltk.corpus.stopwords.words('english'))
+tokenized_stop_words = nltk.word_tokenize(' '.join(nltk.corpus.stopwords.words('english')))
+
 
 def load_data(database_filepath):
     ''' Loads data 
@@ -52,11 +58,11 @@ def build_model():
     #specifying the best parameters that were determined in the gridsearch steps (see ML Pipeline Preparation.ipynb)
 
     model = Pipeline([
-        ('vect', CountVectorizer(tokenizer=tokenize, max_df=0.5, ngram_range=(1, 2))),
+        ('vect', CountVectorizer(tokenizer=tokenize, max_df=0.5, ngram_range=(1, 2), stop_words=tokenized_stop_words)),
         ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier(SGDClassifier(random_state=42)))
     ])
-    
+
     return model
 
 
