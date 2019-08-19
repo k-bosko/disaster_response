@@ -8,7 +8,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.linear_model import SGDClassifier
 from sklearn.metrics import classification_report
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.pipeline import Pipeline
 from sqlalchemy import create_engine
@@ -50,11 +50,13 @@ def build_model():
             model: pipeline consisting of nlp steps and final estimator with multioutput wrapper
     '''
     #specifying the best parameters that were determined in the gridsearch steps (see ML Pipeline Preparation.ipynb)
+
     model = Pipeline([
-        ('vect', CountVectorizer(tokenizer=tokenize, max_df=0.5, ngram_range=(1, 2), stop_words='english')),
+        ('vect', CountVectorizer(tokenizer=tokenize, max_df=0.5, ngram_range=(1, 2))),
         ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier(SGDClassifier(random_state=42)))
     ])
+    
     return model
 
 
