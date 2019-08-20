@@ -53,17 +53,23 @@ def build_model():
         Inputs: 
             None
         Output: 
-            model: pipeline consisting of nlp steps and final estimator with multioutput wrapper
+            cv: model with best parameters found during GridSearch for 
+                pipeline consisting of nlp steps and final estimator with multioutput wrapper
     '''
-    #specifying the best parameters that were determined in the gridsearch steps (see ML Pipeline Preparation.ipynb)
-
+ 
     model = Pipeline([
-        ('vect', CountVectorizer(tokenizer=tokenize, max_df=0.5, ngram_range=(1, 2), stop_words=tokenized_stop_words)),
+        ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier(SGDClassifier(random_state=42)))
     ])
-
-    return model
+    parameters = {
+        'vect__stop_words': (tokenized_stop_words, None),
+        'vect__ngram_range': ((1, 1), (1, 2)),
+        'vect__max_df': (0.5, 0.75, 1.0)
+        }
+  
+    cv = GridSearchCV(model, param_grid=parameters, verbose=2)
+    return cv
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
@@ -78,6 +84,8 @@ def evaluate_model(model, X_test, Y_test, category_names):
             
     '''
     Y_pred = model.predict(X_test)
+    print(model.best_params_, model.best_score_)
+
     for i, col in enumerate(category_names):
         print(i, col)
         print(classification_report(Y_test.to_numpy()[:, i], Y_pred[:, i]))
