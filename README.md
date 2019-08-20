@@ -57,7 +57,7 @@ There are several ways to handle imbalanced dataset with resampling being one of
 
 Since it is a multilabel classification task (meaning we assign simulteniously several labels to a message which are not mutually exclusive), I am not sure if we need to artificially increase the prediction of certain labels. We risk having more false positives in this case, which means bad allocation of resources especially during disasters. For a disaster response project, I believe it is more important for the model to be able to discern relevant messages from irrelevant ones and perform some high-level categorization well (e.g. earthquake vs flood).
 
-As such, the model trained in this project does just that. It has relatively high f1_score on 'relevant', 'aid_related', 'weather_related' categories (0.88, 0.72, 0.63 respectively for positive instances) and can discriminate between earthquake/flood/storm messages well (with f1_score scores being 0.82, 0.63, 0.66 respectively). It also identifies messages related to water, shelter, food, clothing relatively well (0.69, 0.63, 0.78, 0.48). 
+As such, the model trained in this project does just that. It has relatively high f1_score on 'relevant', 'aid_related', 'weather_related' categories (0.89, 0.71, 0.77 respectively for positive instances) and can discriminate between earthquake/flood/storm messages well (with f1_score scores being 0.83, 0.67, 0.66 respectively). It also identifies messages related to water, shelter, food, clothing relatively well (0.67, 0.63, 0.79, 0.49). 
 
 ## Acknowledgements
 This project is part of [Udacity Data Science Nanodegree Programm](https://www.udacity.com/course/data-scientist-nanodegree--nd025). 
