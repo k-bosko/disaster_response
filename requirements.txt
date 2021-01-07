@@ -9,7 +9,7 @@ ipaddr==2.2.0
 itsdangerous==1.1.0
 Jinja2==2.10.1
 joblib==0.13.2
-lxml==4.3.4
+lxml==4.6.2
 MarkupSafe==1.1.1
 nltk==3.4.4
 numpy==1.16.4
